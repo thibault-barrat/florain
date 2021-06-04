@@ -121,18 +121,20 @@ gulp.task( 'browser-sync', function() {
 // gulp scripts.
 // Uglifies and concat all JS files into one
 gulp.task( 'scripts', function() {
-    var scripts = [
+  gulp.src( [`${paths.dev}/js/*.js`, `!${paths.dev}/js/custom-javascript.js`], { allowEmpty: true })
+    .pipe( uglify() )
+    .pipe(rename({ suffix: '.min' }))
+    .pipe( gulp.dest( paths.js ) );
 
-        // Adding currently empty javascript file to add on for your own themes´ customizations
-        // Please add any customizations to this .js file only!
-        `${paths.dev}/js/custom-javascript.js`,
-    ];
-  gulp.src( scripts, { allowEmpty: true } )
+    gulp.src( [`${paths.dev}/js/*.js`, `!${paths.dev}/js/custom-javascript.js`], { allowEmpty: true })
+    .pipe( gulp.dest( paths.js ) );
+    
+  gulp.src( `${paths.dev}/js/custom-javascript.js`, { allowEmpty: true } )
     .pipe( concat( 'main.min.js' ) )
     .pipe( uglify() )
     .pipe( gulp.dest( paths.js ) );
 
-  return gulp.src( scripts, { allowEmpty: true } )
+  return gulp.src( `${paths.dev}/js/custom-javascript.js`, { allowEmpty: true } )
     .pipe( concat( 'main.js' ) )
     .pipe( gulp.dest( paths.js ) );
 });

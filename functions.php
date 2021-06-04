@@ -25,10 +25,14 @@ function oceanwp_child_enqueue_parent_style() {
 	$version = $theme->get( 'Version' );
 	// Load the stylesheet
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/css/style.min.css', array( 'oceanwp-style' ), $version );
-	wp_enqueue_style('leaflet.css', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css');
-	wp_enqueue_script('leaflet.js', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', array( 'jquery' ), false, true);
+	
 	wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/js/main.min.js', array( 'jquery' ), $version, true );
 	
+	if(is_page_template('page-map.php')){
+		wp_enqueue_style('leaflet.css', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css');
+		wp_enqueue_script('leaflet.js', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', array( 'jquery' ), false, true);
+		wp_enqueue_script( 'map-script', get_stylesheet_directory_uri() . '/js/map.min.js', array( 'jquery' ), $version, true );
+	}
 	
 }
 add_action( 'wp_enqueue_scripts', 'oceanwp_child_enqueue_parent_style' );
