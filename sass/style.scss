@@ -323,22 +323,22 @@ input[type="submit"] {
 
 @font-face {
     font-family: BebasNeueRegular;
-    src: url(wp-content/uploads/leaflet/fonts/BebasNeue-webfont.woff);
+    src: url(../fonts/BebasNeue-webfont.woff);
 }
 
 @font-face {
     font-family: Alegreya-Regular;
-    src: url(wp-content/uploads/leaflet/fonts/Alegreya-Regular.ttf);
+    src: url(../fonts/Alegreya-Regular.ttf);
 }
 
 @font-face {
     font-family: Ubuntu-Medium;
-    src: url(wp-content/uploads/leaflet/fonts/Ubuntu-Medium.ttf);
+    src: url(../fonts/Ubuntu-Medium.ttf);
 }
 
 @font-face {
     font-family: Ubuntu-Regular;
-    src: url(wp-content/uploads/leaflet/fonts/Ubuntu-Regular.ttf);
+    src: url(../fonts/Ubuntu-Regular.ttf);
 }
 
 
@@ -452,7 +452,7 @@ div[id^="leaflet-control-accordion-layers"] div.category-container  > label {
 .bt_delete{
     position: relative;
 	float: right;
-	background-image: url(wp-content/uploads/leaflet/delete.png);
+	background-image: url(../img/delete.png);
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: 0px 0px;
@@ -469,13 +469,13 @@ div[id^="leaflet-control-accordion-layers"] div.category-container  > label {
 
 .leaflet-control-layers {
 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-	background: #e0e3ec url(../img/leaflet/bgnoise_lg.jpg) repeat top left;
+	background: #e0e3ec url(../img/bgnoise_lg.jpg) repeat top left;
 	border-radius: 5px;
 }
 /*
 .leaflet-control-layers .leaflet-control-layers-toggle
 {
-  background-image: url(wp-content/uploads/leaflet/layers.png);
+  background-image: url(../img/layers.png);
 }
 */
 
@@ -577,8 +577,8 @@ div[id^="leaflet-control-accordion-layers"] div.category-container  label.chevro
 }
 
 
-.fullscreen-icon { background-image: url(wp-content/uploads/leaflet/icon-fullscreen.png); }
-.leaflet-retina .fullscreen-icon { background-image: url(wp-content/uploads/leaflet/icon-fullscreen-2x.png); background-size: 26px 26px; }
+.fullscreen-icon { background-image: url(../img/icon-fullscreen.png); }
+.leaflet-retina .fullscreen-icon { background-image: url(../img/icon-fullscreen-2x.png); background-size: 26px 26px; }
 /* one selector per rule as explained here : http://www.sitepoint.com/html5-full-screen-api/ */
 .leaflet-container:-webkit-full-screen { width: 100% !important; height: 100% !important; z-index: 99999; }
 .leaflet-container:-ms-fullscreen { width: 100% !important; height: 100% !important; z-index: 99999; }

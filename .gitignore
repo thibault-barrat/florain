@@ -11,3 +11,6 @@ dist-product
 npm-debug.log
 
 /vendor/
+
+geojson
+.DS_Store

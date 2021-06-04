@@ -937,11 +937,21 @@ var mymap;
         }
     }
 
+    //Fix pour le bug "XML mal formé" sur Firefox
+    jQuery.ajaxSetup({beforeSend: function(xhr){
+        if (xhr.overrideMimeType)
+        {
+          xhr.overrideMimeType("application/json");
+        }
+      }
+      });
+
+    
 
 
     //Création des layers
     var epiceriesIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/epiceries_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/epiceries_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -955,16 +965,16 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/epiceries.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/epiceries.geojson', function(data) {
         epiceriesLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/epiceries-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/epiceries-comptoir.geojson', function(data) {
         epiceriesLayer.addData(data);
     });
 
 
     var aussiIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/aussi_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/aussi_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -978,15 +988,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/et_aussi.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/et_aussi.geojson', function(data) {
         aussiLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/et_aussi-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/et_aussi-comptoir.geojson', function(data) {
         aussiLayer.addData(data);
     });
 
     var boulangersIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/boulangers_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/boulangers_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1000,15 +1010,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/paysans_boulangers_et_boulangers.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/paysans_boulangers_et_boulangers.geojson', function(data) {
         boulangersLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/paysans_boulangers_et_boulangers-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/paysans_boulangers_et_boulangers-comptoir.geojson', function(data) {
         boulangersLayer.addData(data);
     });
 
     var soinIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/soin_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/soin_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1022,15 +1032,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/prendre_soin_de_soi.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/prendre_soin_de_soi.geojson', function(data) {
         soinLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/prendre_soin_de_soi-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/prendre_soin_de_soi-comptoir.geojson', function(data) {
         soinLayer.addData(data);
     });
 
     var producteursIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/producteurs_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/producteurs_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1044,15 +1054,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/producteurs.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/producteurs.geojson', function(data) {
         producteursLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/producteurs-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/producteurs-comptoir.geojson', function(data) {
         producteursLayer.addData(data);
     });
 
     var cultureIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/culture_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/culture_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1066,15 +1076,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_cultiver_se_divertir_se_detendre.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_cultiver_se_divertir_se_detendre.geojson', function(data) {
         cultureLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_cultiver_se_divertir_se_detendre-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_cultiver_se_divertir_se_detendre-comptoir.geojson', function(data) {
         cultureLayer.addData(data);
     });
 
     var seDeplacerIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/velo_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/velo_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1088,15 +1098,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_deplacer.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_deplacer.geojson', function(data) {
         seDeplacerLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_deplacer-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_deplacer-comptoir.geojson', function(data) {
         seDeplacerLayer.addData(data);
     });
 
     var seMeublerIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/meuble_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/meuble_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1110,15 +1120,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_meubler_decorer_amenager.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_meubler_decorer_amenager.geojson', function(data) {
         seMeublerLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_meubler_decorer_amenager-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_meubler_decorer_amenager-comptoir.geojson', function(data) {
         seMeublerLayer.addData(data);
     });
 
     var seRestaurerIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/restauration_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/restauration_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1132,15 +1142,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_restaurer_et_boire_un_verre.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_restaurer_et_boire_un_verre.geojson', function(data) {
         seRestaurerLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_restaurer_et_boire_un_verre-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_restaurer_et_boire_un_verre-comptoir.geojson', function(data) {
         seRestaurerLayer.addData(data);
     });
 
     var sengagerIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/engagement_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/engagement_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1154,15 +1164,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/sengager.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/sengager.geojson', function(data) {
         sengagerLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/sengager-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/sengager-comptoir.geojson', function(data) {
         sengagerLayer.addData(data);
     });
 
     var shabillerIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/habiller_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/habiller_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1176,15 +1186,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/shabiller_sequiper.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/shabiller_sequiper.geojson', function(data) {
         shabillerLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/shabiller_sequiper-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/shabiller_sequiper-comptoir.geojson', function(data) {
         shabillerLayer.addData(data);
     });
 
     var traiteursIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/traiteurs_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/traiteurs_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1198,15 +1208,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/traiteurs.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/traiteurs.geojson', function(data) {
         traiteursLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/traiteurs-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/traiteurs-comptoir.geojson', function(data) {
         traiteursLayer.addData(data);
     });
 
 	var amapIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/amap_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/amap_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1220,15 +1230,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/amap.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/amap.geojson', function(data) {
         amapLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/amap-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/amap-comptoir.geojson', function(data) {
         amapLayer.addData(data);
     });
 
 	var educPopIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/educ-pop_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/educ-pop_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1242,15 +1252,15 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/associations_deducation_populaire.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/associations_deducation_populaire.geojson', function(data) {
         educPopLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/associations_deducation_populaire-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/associations_deducation_populaire-comptoir.geojson', function(data) {
         educPopLayer.addData(data);
     });
 
 	var tourismeIcon = L.icon({
-        iconUrl: 'wp-content/uploads/geojson/tourisme_marker.png',
+        iconUrl: 'wp-content/themes/florain/img/tourisme_marker.png',
         iconSize: [34, 52],
         iconAnchor: [14, 42],
         popupAnchor: [0, -35]
@@ -1264,10 +1274,10 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/tourisme_vacances_we.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/tourisme_vacances_we.geojson', function(data) {
         tourismeLayer.addData(data);
     });
-    jQuery.getJSON('wp-content/uploads/geojson/tourisme_vacances_we-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/tourisme_vacances_we-comptoir.geojson', function(data) {
         tourismeLayer.addData(data);
     });
 
@@ -1285,7 +1295,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/epiceries-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/epiceries-comptoir.geojson', function(data) {
         epiceriesComptoirLayer.addData(data);
     });
 
@@ -1298,7 +1308,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/et_aussi-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/et_aussi-comptoir.geojson', function(data) {
         aussiComptoirLayer.addData(data);
     });
 
@@ -1311,7 +1321,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/paysans_boulangers_et_boulangers-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/paysans_boulangers_et_boulangers-comptoir.geojson', function(data) {
         boulangersComptoirLayer.addData(data);
     });
 
@@ -1324,7 +1334,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/prendre_soin_de_soi-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/prendre_soin_de_soi-comptoir.geojson', function(data) {
         soinComptoirLayer.addData(data);
     });
 
@@ -1337,7 +1347,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/producteurs-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/producteurs-comptoir.geojson', function(data) {
         producteursComptoirLayer.addData(data);
     });
 
@@ -1350,7 +1360,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_cultiver_se_divertir_se_detendre-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_cultiver_se_divertir_se_detendre-comptoir.geojson', function(data) {
         cultureComptoirLayer.addData(data);
     });
 
@@ -1363,7 +1373,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_deplacer-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_deplacer-comptoir.geojson', function(data) {
         seDeplacerComptoirLayer.addData(data);
     });
 
@@ -1376,7 +1386,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_meubler_decorer_amenager-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_meubler_decorer_amenager-comptoir.geojson', function(data) {
         seMeublerComptoirLayer.addData(data);
     });
 
@@ -1389,7 +1399,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/se_restaurer_et_boire_un_verre-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/se_restaurer_et_boire_un_verre-comptoir.geojson', function(data) {
         seRestaurerComptoirLayer.addData(data);
     });
 
@@ -1402,7 +1412,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/sengager-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/sengager-comptoir.geojson', function(data) {
         sengagerComptoirLayer.addData(data);
     });
 
@@ -1415,7 +1425,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/shabiller_sequiper-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/shabiller_sequiper-comptoir.geojson', function(data) {
         shabillerComptoirLayer.addData(data);
     });
 
@@ -1428,7 +1438,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/traiteurs-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/traiteurs-comptoir.geojson', function(data) {
         traiteursComptoirLayer.addData(data);
     });
 
@@ -1441,7 +1451,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/amap-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/amap-comptoir.geojson', function(data) {
         amapComptoirLayer.addData(data);
     });
 
@@ -1454,7 +1464,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/associations_deducation_populaire-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/associations_deducation_populaire-comptoir.geojson', function(data) {
         educPopComptoirLayer.addData(data);
     });
 
@@ -1467,7 +1477,7 @@ var mymap;
         },
         onEachFeature: onEachFeature
     });
-    jQuery.getJSON('wp-content/uploads/geojson/tourisme_vacances_we-comptoir.geojson', function(data) {
+    jQuery.getJSON('wp-content/themes/florain/geojson/tourisme_vacances_we-comptoir.geojson', function(data) {
         tourismeComptoirLayer.addData(data);
     });
 

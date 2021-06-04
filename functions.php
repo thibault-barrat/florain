@@ -26,8 +26,9 @@ function oceanwp_child_enqueue_parent_style() {
 	// Load the stylesheet
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/css/style.min.css', array( 'oceanwp-style' ), $version );
 	wp_enqueue_style('leaflet.css', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css');
-	wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/js/main.min.js', array( 'jquery' ), $version, true );
 	wp_enqueue_script('leaflet.js', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', array( 'jquery' ), false, true);
+	wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/js/main.min.js', array( 'jquery' ), $version, true );
+	
 	
 }
 add_action( 'wp_enqueue_scripts', 'oceanwp_child_enqueue_parent_style' );
