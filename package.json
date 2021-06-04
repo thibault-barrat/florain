@@ -1,0 +1,46 @@
+{
+  "name": "florain",
+  "version": "0.1.0",
+  "description": "Thème Wordpress du FLorain: https://github.com/thibault-barrat/florain",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thibault-barrat/florain.git"
+  },
+  "keywords": [
+    "wordpress",
+    "theme",
+    "framework",
+    "oceanwp"
+  ],
+  "author": "Thibault Barrat",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/thibault-barrat/florain/issues"
+  },
+  "homepage": "https://www.florain.fr",
+  "dependencies": {
+    "browser-sync": "^2.26.13",
+    "del": "^4.1.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-clone": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-ignore": "^2.0.2",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-merge": "^0.1.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-rimraf": "^0.2.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-sequence": "^1.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
+    "merge2": "^1.4.1",
+    "run-sequence": "^2.2.1"
+  }
+}
