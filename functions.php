@@ -36,3 +36,24 @@ function oceanwp_child_enqueue_parent_style() {
 	
 }
 add_action( 'wp_enqueue_scripts', 'oceanwp_child_enqueue_parent_style' );
+
+
+/**
+ *  Charger le script spécifique aux pages 
+ * admin.php?page=participants-database-add_participant 
+ * et admin.php?page=participants-database-edit_participant 
+ */
+
+function admin_participants_form_script($hook) {
+
+	if ( 'base-de-donnees-des-participants_page_participants-database-add_participant' != $hook && 'admin_page_participants-database-edit_participant' != $hook) {
+		return;
+	}
+	$theme   = wp_get_theme( 'OceanWP' );
+	$version = $theme->get( 'Version' );
+	wp_enqueue_script( 'admin-participants-form-script', get_stylesheet_directory_uri() . '/js/admin-participants-form.min.js', array(), $version, true );
+  }
+  add_action('admin_enqueue_scripts', 'admin_participants_form_script');
+
+
+
