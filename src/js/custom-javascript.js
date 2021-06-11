@@ -32,3 +32,12 @@ jQuery(document).ready(function(){
     });
 });
 
+/****************/
+/* Page acteur */
+/***************/
+
+/* Modification du titre de la page pour y intégrer le nom de l'acteur */
+if(document.title == 'Acteur – Le Florain') {
+    document.title = document.getElementsByClassName('titre  flex-value')[0].textContent + ' - Acteur - Le FLorain';
+}
+

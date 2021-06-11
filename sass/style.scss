@@ -226,7 +226,7 @@ input[type="submit"] {
     }
 }
 
-.pdb-field-image .pdb-field-title, .pdb-field-titre .pdb-field-title, .pdb-field.pdb-field-sous_categorie, .pdb-field-description_courte .pdb-field-title, .pdb-field-description_longue .pdb-field-title{
+.pdb-field-image .pdb-field-title, .pdb-field-titre .pdb-field-title, .pdb-field.pdb-field-sous_categorie, .pdb-field-description_courte .pdb-field-title, .pdb-field-description_longue .pdb-field-title, .pdb-field-message_comptoir .pdb-field-title{
     display: none;
 }
 .pdb-list .pdb-field-image .image-field-wrap img {
@@ -284,6 +284,11 @@ input[type="submit"] {
         img {
             height: 15em;
         }
+        .flex-label {
+            display: none;
+        }
+    }
+    .pdb-message_comptoir {
         .flex-label {
             display: none;
         }
