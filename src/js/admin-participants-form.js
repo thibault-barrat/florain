@@ -46,6 +46,9 @@ parentSelect.addEventListener('change', function(e) {
         //on trouve le optgroup correspondant dans la liste déroulante enfant
         var childGroup = childSelect.querySelector('optgroup[label*="'+selection+'"]');
 
+        //on trouve les options du optgroup
+        var options = childGroup.querySelectorAll('option');
+
         //on rend ce groupe visible 
         childGroup.style.display = 'inherit';
 
@@ -55,20 +58,19 @@ parentSelect.addEventListener('change', function(e) {
     if (childValue != '' && window.getComputedStyle(childSelect.querySelector('option[value="' + childValue + '"]').parentNode).display != 'none') {
         childSelect.value = childValue;
     } else if (typeof childGroup !== 'undefined') {
-        var options = childGroup.querySelectorAll('option');
         options.forEach(function(element){
             if (parentSelect.value == element.value) {
                 childSelect.value = element.value;
             }
         });
-        //on affiche le champ enfant si le optgroup a plus d'un enfant
-        if(options.length > 1) {
-            childSelect.parentNode.parentNode.style.display = 'table-row';
-        }
-        
     } else {
         childSelect.value = '';
     } 
+
+    //on affiche le champ enfant si le optgroup a plus d'un enfant
+    if(options.length > 1) {
+        childSelect.parentNode.parentNode.style.display = 'table-row';
+    }
 })
 
 //on effectue les opérations dès le chargement en forçant un événement change
