@@ -353,7 +353,7 @@ input[type="submit"] {
 .ac-container{
 	width: auto;
 	text-align: left;
-	overflow-y: auto;
+	overflow-y: hidden;
 	overflow-x: hidden;
 	height: auto;
 }
@@ -418,7 +418,7 @@ div[id^="leaflet-control-accordion-layers"] div.category-container  > label {
 
 .ac-container input.menu:checked ~ article.ac-large{
 	height: auto;
-	max-height : 120px;
+	max-height : 130px;
 	padding: 8px 0;
 	overflow-y: auto;
     line-height: 18px;

@@ -883,22 +883,45 @@ var mymap;
 
     function onEachFeature(feature, layer) {
         if (feature.properties) {
-            if (feature.properties.site_web != null && feature.properties.site_web != '') {
-                var content = '<h2>' + feature.properties.titre + '</h2>' +
-                    '<img src="wp-content/uploads/participants-database/' + feature.properties.image + '" class="logo-popup" alt="Logo"/>' +
-                    '<table cellpadding="2">' +
-                    '<tr>' + '<th>Description</th>' + '<td>' + feature.properties.description_longue + '</td>' + '</tr>' +
-                    '<tr>' + '<th>Addresse</th>' + '<td>' + feature.properties.adresse + ' ' + feature.properties.code_postal + ' ' + feature.properties.ville + '</td>' + '</tr>' +
-                    '<tr>' + '<th>Site web</th>' + '<td><a target="_blank" href="http://' + feature.properties.site_web + '" rel="noopener noreferrer">' + feature.properties.site_web + '</a></td>' + '</tr>' +
-                    '<table>';
-            } else {
-                var content = '<h2>' + feature.properties.titre + '</h2>' +
-                    '<img src="wp-content/uploads/participants-database/' + feature.properties.image + '" class="logo-popup" alt="Logo"/>' +
-                    '<table cellpadding="2">' +
-                    '<tr>' + '<th>Description</th>' + '<td>' + feature.properties.description_longue + '</td>' + '</tr>' +
-                    '<tr>' + '<th>Addresse</th>' + '<td>' + feature.properties.adresse + ' ' + feature.properties.code_postal + ' ' + feature.properties.ville + '</td>' + '</tr>' +
-                    '<table>';
+            var content = '<h2><a href="acteur/?pdb=' + feature.properties.id + '">' + feature.properties.titre + '</a></h2>' +
+                '<img src="wp-content/uploads/participants-database/' + feature.properties.image + '" class="logo-popup" alt="Logo"/>';
+            if(feature.properties.comptoir == 'Oui') {
+                content += '<h4>Comptoir de change</h4>';
+                if(feature.properties.message_comptoir != null && feature.properties.message_comptoir.trim() != '') {
+                    content += '<p>' + feature.properties.message_comptoir + '</p>';
+                }
             }
+            content += '<table cellpadding="2">' +
+                '<tr>' + '<th>Description</th>' + '<td>' + feature.properties.description_longue + '</td>' + '</tr>';
+            if (feature.properties.adresse != null && feature.properties.adresse.trim() != '' || feature.properties.code_postal != null && feature.properties.code_postal.trim() != '' || feature.properties.ville != null && feature.properties.ville.trim() != '' ) {
+                content += '<tr>' + '<th>Addresse</th>' + '<td>' + feature.properties.adresse + ' ' + feature.properties.code_postal + ' ' + feature.properties.ville + '</td>' + '</tr>';
+            }
+            if (feature.properties.site_web != null && feature.properties.site_web.trim() != '') {
+                content += '<tr>' + '<th>Site web</th>' + '<td><a target="_blank" href="' + feature.properties.site_web + '" rel="noopener noreferrer">' + feature.properties.site_web + '</a></td>' + '</tr>';
+            } 
+            if (feature.properties.présence_sur_les_marchés != null && Array.isArray(feature.properties.présence_sur_les_marchés)) {
+                content += '<tr>' + '<th>Marchés</th>' + '<td>';
+                feature.properties.présence_sur_les_marchés.forEach((item, index, arr) => {
+                    if(index != arr.length - 1){
+                        content += '<a href="acteur/?pdb=' + item.id + '">' + item.titre + '</a>, ';
+                    } else {
+                        content += '<a href="acteur/?pdb=' + item.id + '">' + item.titre + '</a>';
+                    }
+                });
+                content += '</td>' + '</tr>';
+            } 
+            if (feature.properties.categorie == "Marchés" && feature.properties.acteurs_presents != null) {
+                content += '<tr>' + '<th>Acteurs présents</th>' + '<td>';
+                feature.properties.acteurs_presents.forEach((item, index, arr) => {
+                    if(index != arr.length - 1){
+                        content += '<a href="acteur/?pdb=' + item.id + '">' + item.titre + '</a>, ';
+                    } else {
+                        content += '<a href="acteur/?pdb=' + item.id + '">' + item.titre + '</a>';
+                    }
+                });
+                content += '</td>' + '</tr>';
+            }
+            content += '<table>';        
             layer.bindPopup(content);
         }
     }
@@ -1247,7 +1270,51 @@ var mymap;
         tourismeLayer.addData(data);
     });
 
-    var seNourrir = L.layerGroup([epiceriesLayer, producteursLayer, boulangersLayer, traiteursLayer, amapLayer]);
+    var brasseriesIcon = L.icon({
+        iconUrl: 'wp-content/themes/florain/img/brasseries_marker.png',
+        iconSize: [34, 52],
+        iconAnchor: [14, 42],
+        popupAnchor: [0, -35]
+    });
+    var brasseriesLayer = new L.geoJson(null, {
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, {
+                icon: brasseriesIcon,
+                title: feature.properties.titre
+            });
+        },
+        onEachFeature: onEachFeature
+    });
+    jQuery.getJSON('wp-content/themes/florain/geojson/brasseries.geojson', function(data) {
+        brasseriesLayer.addData(data);
+    });
+    jQuery.getJSON('wp-content/themes/florain/geojson/brasseries-comptoir.geojson', function(data) {
+        brasseriesLayer.addData(data);
+    });
+
+    var marchesIcon = L.icon({
+        iconUrl: 'wp-content/themes/florain/img/marches_marker.png',
+        iconSize: [34, 52],
+        iconAnchor: [14, 42],
+        popupAnchor: [0, -35]
+    });
+    var marchesLayer = new L.geoJson(null, {
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, {
+                icon: marchesIcon,
+                title: feature.properties.titre
+            });
+        },
+        onEachFeature: onEachFeature
+    });
+    jQuery.getJSON('wp-content/themes/florain/geojson/marches.geojson', function(data) {
+        marchesLayer.addData(data);
+    });
+    jQuery.getJSON('wp-content/themes/florain/geojson/marches-comptoir.geojson', function(data) {
+        marchesLayer.addData(data);
+    });
+
+    var seNourrir = L.layerGroup([epiceriesLayer, producteursLayer, boulangersLayer, brasseriesLayer, traiteursLayer, amapLayer]);
     var sortir = L.layerGroup([seRestaurerLayer, cultureLayer, educPopLayer, tourismeLayer]);
 
 	var tousLayer = new L.geoJson(null);
@@ -1447,7 +1514,33 @@ var mymap;
         tourismeComptoirLayer.addData(data);
     });
 
-    var seNourrirComptoir = L.layerGroup([epiceriesComptoirLayer, producteursComptoirLayer, boulangersComptoirLayer, traiteursComptoirLayer, amapComptoirLayer]);
+    var brasseriesComptoirLayer = new L.geoJson(null, {
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, {
+                icon: brasseriesIcon,
+                title: feature.properties.titre
+            });
+        },
+        onEachFeature: onEachFeature
+    });
+    jQuery.getJSON('wp-content/themes/florain/geojson/brasseries-comptoir.geojson', function(data) {
+        brasseriesComptoirLayer.addData(data);
+    });
+
+    var marchesComptoirLayer = new L.geoJson(null, {
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, {
+                icon: marchesIcon,
+                title: feature.properties.titre
+            });
+        },
+        onEachFeature: onEachFeature
+    });
+    jQuery.getJSON('wp-content/themes/florain/geojson/marches-comptoir.geojson', function(data) {
+        marchesComptoirLayer.addData(data);
+    });
+
+    var seNourrirComptoir = L.layerGroup([epiceriesComptoirLayer, producteursComptoirLayer, boulangersComptoirLayer, brasseriesComptoirLayer, traiteursComptoirLayer, amapComptoirLayer]);
     var sortirComptoir = L.layerGroup([seRestaurerComptoirLayer, cultureComptoirLayer, educPopComptoirLayer, tourismeComptoirLayer]);
 
 	var tousComptoirLayer = new L.geoJson(null);
@@ -1471,6 +1564,7 @@ var mymap;
     seMeublerLayer.addTo(mymap);
     sengagerLayer.addTo(mymap);
     aussiLayer.addTo(mymap);
+    marchesLayer.addTo(mymap);
 
 
 
@@ -1488,6 +1582,7 @@ var mymap;
             "Epiceries": epiceriesLayer,
             "Producteurs": producteursLayer,
             "Paysans boulangers et boulangers": boulangersLayer,
+            "Brasseries": brasseriesLayer,
             "Traiteurs": traiteursLayer,
           	"AMAP": amapLayer
         }
@@ -1536,6 +1631,12 @@ var mymap;
         layers: {
             "S'engager": sengagerLayer
         }
+    }, {
+        groupName: "Marches",
+        expanded: true,
+        layers: {
+            "Marches": marchesLayer
+        }
     }];
 
     soinLayer.StyledLayerControl = {
@@ -1561,6 +1662,9 @@ var mymap;
     sengagerLayer.StyledLayerControl = {
         hiddenSubLayers: true
     };
+    marchesLayer.StyledLayerControl = {
+        hiddenSubLayers: true
+    };
 	tousLayer.StyledLayerControl = {
         hiddenSubLayers: true
     };
@@ -1579,6 +1683,7 @@ var mymap;
             "Epiceries": epiceriesComptoirLayer,
             "Producteurs": producteursComptoirLayer,
             "Paysans boulangers et boulangers": boulangersComptoirLayer,
+            "Brasseries": brasseriesComptoirLayer,
             "Traiteurs": traiteursComptoirLayer,
           	"AMAP": amapComptoirLayer
         }
@@ -1627,6 +1732,12 @@ var mymap;
         layers: {
             "Et aussi": aussiComptoirLayer
         }
+    }, {
+        groupName: "Marches",
+        expanded: true,
+        layers: {
+            "Marches": marchesComptoirLayer
+        }
     }];
 
     soinComptoirLayer.StyledLayerControl = {
@@ -1650,6 +1761,9 @@ var mymap;
     };
 
     sengagerComptoirLayer.StyledLayerControl = {
+        hiddenSubLayers: true
+    };
+    marchesComptoirLayer.StyledLayerControl = {
         hiddenSubLayers: true
     };
 	tousComptoirLayer.StyledLayerControl = {
@@ -1679,6 +1793,7 @@ var mymap;
         layersControl.selectGroup( "Se meubler, decorer, amenager" );
         layersControl.selectGroup( "Et aussi..." );
         layersControl.selectGroup( "S'engager" );
+        layersControl.selectGroup( "Marches" );
       } else if (eo.layer === tousComptoirLayer) {
         layersComptoirControl.selectGroup( "Se nourrir" );
         layersComptoirControl.selectGroup( "Sortir" );
@@ -1688,6 +1803,7 @@ var mymap;
         layersComptoirControl.selectGroup( "Se meubler, decorer, amenager" );
         layersComptoirControl.selectGroup( "Et aussi..." );
         layersComptoirControl.selectGroup( "S'engager" );
+        layersComptoirControl.selectGroup( "Marches" );
       }
     });
 	mymap.on('overlayremove', function(eo){ 
@@ -1700,6 +1816,7 @@ var mymap;
         layersControl.unSelectGroup( "Se meubler, decorer, amenager" );
         layersControl.unSelectGroup( "Et aussi..." );
         layersControl.unSelectGroup( "S'engager" );
+        layersControl.unSelectGroup( "Marches" );
       } else if (eo.layer === tousComptoirLayer) {
         layersComptoirControl.unSelectGroup( "Se nourrir" );
         layersComptoirControl.unSelectGroup( "Sortir" );
@@ -1709,6 +1826,7 @@ var mymap;
         layersComptoirControl.unSelectGroup( "Se meubler, decorer, amenager" );
         layersComptoirControl.unSelectGroup( "Et aussi..." );
         layersComptoirControl.unSelectGroup( "S'engager" );
+        layersComptoirControl.unSelectGroup( "Marches" );
       }
     });
 
@@ -1731,6 +1849,7 @@ var mymap;
             mymap.removeLayer(seMeublerLayer);
             mymap.removeLayer(sengagerLayer);
             mymap.removeLayer(aussiLayer);
+            mymap.removeLayer(marchesLayer);
           	mymap.removeLayer(tousLayer);
             mymap.removeControl(layersControl);
             mymap.addControl(layersComptoirControl);
@@ -1742,6 +1861,7 @@ var mymap;
             mymap.addLayer(seMeublerComptoirLayer);
             mymap.addLayer(sengagerComptoirLayer);
             mymap.addLayer(aussiComptoirLayer);
+            mymap.addLayer(marchesComptoirLayer);
           	mymap.addLayer(tousComptoirLayer);
         } else if (this.value == 'acteurs') {
 
@@ -1753,6 +1873,7 @@ var mymap;
             mymap.removeLayer(seMeublerComptoirLayer);
             mymap.removeLayer(sengagerComptoirLayer);
             mymap.removeLayer(aussiComptoirLayer);
+            mymap.removeLayer(marchesComptoirLayer);
           	mymap.removeLayer(tousComptoirLayer);
             mymap.removeControl(layersComptoirControl);
             mymap.addControl(layersControl);
@@ -1764,6 +1885,7 @@ var mymap;
             mymap.addLayer(seMeublerLayer);
             mymap.addLayer(sengagerLayer);
             mymap.addLayer(aussiLayer);
+            mymap.addLayer(marchesLayer);
           	mymap.addLayer(tousLayer);
         }
     });
