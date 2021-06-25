@@ -56,4 +56,10 @@ function admin_participants_form_script($hook) {
   add_action('admin_enqueue_scripts', 'admin_participants_form_script');
 
 
+/**
+ * Créer les fichiers geojson à chaque édition ou création d'un acteur
+ */
 
+ require_once('inc/acteurs_geojson.php');
+ add_action('pdb-after_submit_update', 'acteurs_geojson');
+ add_action('pdb-after_submit_add', 'acteurs_geojson');
