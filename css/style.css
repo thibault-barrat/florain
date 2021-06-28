@@ -246,6 +246,22 @@ input[type="submit"] {
 .pdb-single-flex .pdb-message_comptoir .flex-label {
   display: none; }
 
+.pdb-single-flex .acteur-nav {
+  position: absolute;
+  top: 25%;
+  text-align: center; }
+  .pdb-single-flex .acteur-nav-previous {
+    left: 0; }
+  .pdb-single-flex .acteur-nav-next {
+    right: 0; }
+  .pdb-single-flex .acteur-nav a {
+    text-decoration: none !important;
+    color: #dadad9; }
+    .pdb-single-flex .acteur-nav a:hover {
+      color: inherit; }
+    .pdb-single-flex .acteur-nav a i {
+      font-size: 40px; }
+
 /********/
 /* Menu */
 /********/

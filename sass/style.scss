@@ -293,6 +293,28 @@ input[type="submit"] {
             display: none;
         }
     }
+    .acteur-nav {
+        position: absolute;
+        top: 25%;
+        text-align: center;
+        &-previous {
+            left: 0;
+        }
+        &-next{
+            right: 0;
+        }
+        a {
+            text-decoration: none!important;
+            color: #dadad9;
+            &:hover {
+                color: inherit;
+            }
+
+            i {
+                font-size: 40px;
+            }
+        }
+    }
 }
 
 /********/
