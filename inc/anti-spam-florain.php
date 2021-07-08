@@ -15,21 +15,18 @@ function anti_spam_florain( $spam ) {
 
     if( substr_count( $name, $prenom ) != 0 || substr_count( $prenom, $name ) ) {
         $spam = true;
-      } else
-      if( strlen( $monmessage ) == 0 )
+      } else if( strlen( $monmessage ) == 0 )
       {
         $spam = true;
-      } else {
-      if( substr_count( $monmessage, "http") != 0 ) {
+      } else if( substr_count( $monmessage, "http") != 0 ) {
         $spam = true;
-       
-      } else
-      if( $calcul != "2" && $calcul != "deux") {
+      } else if( $calcul != "2" && $calcul != "deux") {
         $spam = true;
       }
    
    
 	return $spam;
-  }
+  
+}
 
 ?>
