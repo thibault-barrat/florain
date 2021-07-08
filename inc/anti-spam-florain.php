@@ -29,4 +29,18 @@ function anti_spam_florain( $spam ) {
   
 }
 
+
+
+function spam_error_message( $message, $status ) { 
+        $submission = WPCF7_Submission::get_instance();
+		  
+		if ( $submission->is( 'spam' ) ) {
+
+			
+			$message = __( "Votre message a été considéré comme du spam pour l'une des raisons suivantes : prénom et nom identiques, message vide, présence d'un lien dans le message, mauvaise réponse au calcul.", '');
+		   
+		}
+return $message;
+}
+
 ?>

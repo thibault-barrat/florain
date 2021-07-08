@@ -69,5 +69,5 @@ function admin_participants_form_script($hook) {
   */
   require_once('inc/anti-spam-florain.php');
   add_filter( 'wpcf7_spam', 'anti_spam_florain', 10, 1 );
-
+  add_filter( 'wpcf7_display_message', 'spam_error_message', 10, 2 );
   
