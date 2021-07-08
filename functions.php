@@ -63,3 +63,11 @@ function admin_participants_form_script($hook) {
  require_once('inc/acteurs_geojson.php');
  add_action('pdb-after_submit_update', 'acteurs_geojson');
  add_action('pdb-after_submit_add', 'acteurs_geojson');
+
+ /**
+  * Filtre anti spam pour Contact Form 7
+  */
+  require_once('inc/anti-spam-florain.php');
+  add_filter( 'wpcf7_spam', 'anti_spam_florain', 10, 1 );
+
+  
